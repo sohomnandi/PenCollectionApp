@@ -10,6 +10,25 @@ PenCollectionApp is a simple .NET desktop application for managing a personal pe
 - .NET 10 SDK
 - Microsoft Visual Studio 2026 (or later) or any IDE that supports .NET 10 projects
 
+## Database / Backend
+The application uses a SQL Server backend for storing pen collection data. If you don't already have a database, create one in SQL Server (for example, named `PenCollectionDb`) and update the application's connection string (App.config, Settings, or other config location) to point to your server and database.
+
+Quick example using sqlcmd or SSMS to create a database and a simple table:
+
+   CREATE DATABASE PenCollectionDb;
+   GO
+   USE PenCollectionDb;
+   GO
+   CREATE TABLE Pens (
+	   Id INT IDENTITY(1,1) PRIMARY KEY,
+	   Make NVARCHAR(200) NOT NULL,
+	   Model NVARCHAR(200) NULL,
+	   Color NVARCHAR(100) NULL,
+	   Notes NVARCHAR(MAX) NULL
+   );
+
+If the repository includes a SQL script or migration files, run those instead of the example above. Ensure the connection string is secured and, when deploying, use an appropriate authentication method (Windows Auth or SQL Auth) for your environment.
+
 ## Getting started
 1. Clone the repository:
 
@@ -30,7 +49,3 @@ Alternatively, from a command line with the .NET 10 SDK installed:
 ## Contributing
 - Open issues or pull requests on the repository: https://github.com/sohomnandi/PenCollectionApp
 
-## License
-No license specified. Add a LICENSE file if you wish to define one.
-
-If you need help building or running the project, provide the errors or screenshots and environment details.
